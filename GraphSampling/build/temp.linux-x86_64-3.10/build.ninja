@@ -1,0 +1,20 @@
+ninja_required_version = 1.3
+cxx = c++
+
+cflags = -pthread -B /home/rong/.conda/envs/ogb/compiler_compat -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -fPIC -O2 -isystem /home/rong/.conda/envs/ogb/include -fPIC -O2 -isystem /home/rong/.conda/envs/ogb/include -fPIC -I/home/rong/.conda/envs/ogb/lib/python3.10/site-packages/torch/include -I/home/rong/.conda/envs/ogb/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -I/home/rong/.conda/envs/ogb/lib/python3.10/site-packages/torch/include/TH -I/home/rong/.conda/envs/ogb/lib/python3.10/site-packages/torch/include/THC -I/home/rong/.conda/envs/ogb/include/python3.10 -c
+post_cflags = -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=sample -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++14
+ldflags = 
+
+rule compile
+  command = $cxx -MMD -MF $out.d $cflags -c $in -o $out $post_cflags
+  depfile = $out.d
+  deps = gcc
+
+
+
+build /home/rong/Large_Scale_GCN_Benchmarking/GraphSampling/build/temp.linux-x86_64-3.10/./cpp_extension/sample.o: compile /home/rong/Large_Scale_GCN_Benchmarking/GraphSampling/cpp_extension/sample.cpp
+
+
+
+
+
